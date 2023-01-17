@@ -21,6 +21,24 @@ const getInitials = fullname => {
   return result._pipeline[0].$project;
 }
 
+const getRandomNumbers = count => {
+  const arr = [];
+  for (let i = 0; i < count; i++) {
+    arr.push(Math.floor(Math.random() * 1000));
+  }
+
+  const result = User.aggregate([
+    {
+      $project:
+      {
+        result: arr.join(', ')
+      }
+    }
+  ]);
+
+  return result._pipeline[0].$project;
+}
+
 const createOneUser = async body => {
   const user = new User(body);
   const savedUser = await user.save();
@@ -31,5 +49,6 @@ const createOneUser = async body => {
 module.exports = {
   createOneUser,
   getAllUsers,
-  getInitials
+  getInitials,
+  getRandomNumbers
 };
