@@ -2,7 +2,8 @@ const { validationResult } = require('express-validator');
 const {
   createOneUser,
   getAllUsers,
-  getInitials
+  getInitials,
+  getRandomNumbers
 } = require('../services/user.service');
 
 const getUsers = async (req, res) => {
@@ -25,6 +26,16 @@ const getUsersInitials = (req, res) => {
   }
 }
 
+const getRandom = (req, res) => {
+  try {
+    const random = getRandomNumbers(req.params.count);
+
+    res.status(200).send(random);
+  } catch (error) {
+    res.status(500).send('Failed to get random numbers');
+  }
+}
+
 const postUser = async (req, res) => {
   try {
     const errors = validationResult(req, res);
@@ -42,5 +53,6 @@ const postUser = async (req, res) => {
 module.exports = {
   postUser,
   getUsers,
-  getUsersInitials
+  getUsersInitials,
+  getRandom
 };
