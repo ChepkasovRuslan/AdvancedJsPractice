@@ -4,7 +4,8 @@ const {
   getAllUsers,
   getInitials,
   getRandomNumbers,
-  deleteOneuser
+  deleteOneuser,
+  updateUser
 } = require('../services/user.service');
 
 const getUsers = async (req, res) => {
@@ -61,10 +62,21 @@ const deleteUser = async (req, res) => {
   }
 }
 
+const patchUser = async (req, res) => {
+  try {
+    const result = await updateUser(req.params.id, req.body);
+
+    res.status(202).send(result);
+  } catch (error) {
+    res.status(404).send('User to update not found');
+  }
+}
+
 module.exports = {
   postUser,
   getUsers,
   getUsersInitials,
   getRandom,
-  deleteUser
+  deleteUser,
+  patchUser
 };

@@ -52,10 +52,17 @@ const deleteOneuser = async id => {
   return deletedUser;
 }
 
+const updateUser = async (id, body) => {
+  const updatedUser = await User.findByIdAndUpdate(id, body);
+
+  return updatedUser;
+}
+
 module.exports = {
   createOneUser,
   getAllUsers,
   getInitials,
   getRandomNumbers,
-  deleteOneuser
+  deleteOneuser,
+  updateUser
 };
