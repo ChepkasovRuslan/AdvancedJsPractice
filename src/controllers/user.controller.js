@@ -2,6 +2,7 @@ const { validationResult } = require('express-validator');
 const {
   createOneUser,
   getAllUsers,
+  getInitials
 } = require('../services/user.service');
 
 const getUsers = async (req, res) => {
@@ -11,6 +12,16 @@ const getUsers = async (req, res) => {
     res.status(200).send(users);
   } catch (error) {
     res.status(404).send('Failed to find tasks');
+  }
+}
+
+const getUsersInitials = (req, res) => {
+  try {
+    const initials = getInitials(req.params.fullName);
+
+    res.status(200).send(initials);
+  } catch (error) {
+    res.status(500).send('Failed to get initials');
   }
 }
 
@@ -30,5 +41,6 @@ const postUser = async (req, res) => {
 
 module.exports = {
   postUser,
-  getUsers
+  getUsers,
+  getUsersInitials
 };

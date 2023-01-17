@@ -5,11 +5,14 @@ const router = express.Router();
 
 const {
   postUser,
-  getUsers
+  getUsers,
+  getUsersInitials
 } = require('../controllers/user.controller');
 
 // Создать роут для сохранения пользователя в БД.
 router.post('/users', userValidation, postUser);
 router.get('/users', getUsers);
+// Создать роут, который получит fullName пользователя и вернет только его инициалы, например: fullName: Denis Petrov => result: DP
+router.get('/users/initials/:fullName', getUsersInitials);
 
 module.exports = router;
