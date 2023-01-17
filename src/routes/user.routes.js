@@ -8,7 +8,8 @@ const {
   getUsers,
   getUsersInitials,
   getRandom,
-  deleteUser
+  deleteUser,
+  patchUser
 } = require('../controllers/user.controller');
 
 // Создать роут для сохранения пользователя в БД.
@@ -20,5 +21,7 @@ router.get('/users/initials/:fullName', getUsersInitials);
 router.get('/users/random/:count', getRandom);
 // Создать роут на удаление пользователя из БД.
 router.delete('/users/:id', deleteUser);
+// Создать роут для изменения данных о пользователе в БД.
+router.patch('/users/:id', patchUser);
 
 module.exports = router;
