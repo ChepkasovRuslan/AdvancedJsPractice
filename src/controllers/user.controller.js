@@ -3,7 +3,8 @@ const {
   createOneUser,
   getAllUsers,
   getInitials,
-  getRandomNumbers
+  getRandomNumbers,
+  deleteOneuser
 } = require('../services/user.service');
 
 const getUsers = async (req, res) => {
@@ -50,9 +51,20 @@ const postUser = async (req, res) => {
   }
 }
 
+const deleteUser = async (req, res) => {
+  try {
+    const result = await deleteOneuser(req.params.id);
+
+    res.status(202).send(result);
+  } catch (error) {
+    res.status(404).send('User to delete not found');
+  }
+}
+
 module.exports = {
   postUser,
   getUsers,
   getUsersInitials,
-  getRandom
+  getRandom,
+  deleteUser
 };

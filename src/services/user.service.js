@@ -46,9 +46,16 @@ const createOneUser = async body => {
   return savedUser;
 }
 
+const deleteOneuser = async id => {
+  const deletedUser = await User.findByIdAndDelete(id);
+
+  return deletedUser;
+}
+
 module.exports = {
   createOneUser,
   getAllUsers,
   getInitials,
-  getRandomNumbers
+  getRandomNumbers,
+  deleteOneuser
 };
